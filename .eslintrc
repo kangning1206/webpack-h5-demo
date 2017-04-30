@@ -1,0 +1,16 @@
+{
+    "extends": "eslint-config-ali/react",
+    "env": {
+        "mocha": true
+    },
+    "globals": {
+        "GLOBAL": true,
+        "React": true
+    },
+    "rules": {
+        "react/jsx-filename-extension": ["error", {
+            "extensions": [".js", ".jsx"]
+        }],
+        "max-len": 0
+    }
+}

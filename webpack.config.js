@@ -13,7 +13,7 @@ module.exports = {
         filename: '[name].js'
     },
     // source-map
-    devtool: '#source-map',
+    //devtool: '#source-map',
     module: {
         //加载器配置
         loaders: [
