@@ -17,36 +17,24 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   loader: 'eslint-loader',
-      //   enforce: 'pre',
-      //   include: [resolve('src'), resolve('test')],
-      //   // options: {
-      //   //   formatter: require('eslint-friendly-formatter')
-      //   // }
-      // },
-      {
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
-      },
-      // {
-      //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      //   loader: 'url-loader',
-      //   options: {
-      //     limit: 10000,
-      //     //name: utils.assetsPath('img/[name].[hash:7].[ext]')
-      //   }
-      // },
-      // {
-      //   test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-      //   loader: 'url-loader',
-      //   options: {
-      //     limit: 10000,
-      //     //name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-      //   }
-      // }
-    ]
+          {
+              test: /\.css$/,
+              loader: 'style-loader!css-loader'
+          }, {
+              test: /\.(js|jsx)$/,
+              loader: 'babel-loader',
+              //exclude: /node_modules/,
+              include: [resolve('src'), resolve('test')],
+              query: {
+                  presets: ['babel-preset-react', 'babel-preset-es2015']
+              }
+          }, {
+              test: /\.scss$/,
+              loader: 'style!css!sass?sourceMap'
+          }, {
+              test: /\.(png|jpg)$/,
+              loader: 'url-loader?limit=8192'
+          }
+      ]
   }
 }

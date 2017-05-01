@@ -20,18 +20,17 @@ import NotFound from '../pages/404';
 
 const AppRouter = () => (
   <Router forceRefresh>
-    <Switch>
+    <div>
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About</Link></li>
       </ul>
-
-      <hr />
-
+    <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route component={NotFound} />
     </Switch>
+    </div>
   </Router>
 );
 

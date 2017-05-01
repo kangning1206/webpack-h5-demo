@@ -5,9 +5,9 @@ module.exports = {
   build: {
     env: 'production',
     index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, './dist'),
+    assetsRoot: path.resolve(__dirname, '../dist'),
     assetsPublicPath: '/',
-    productionSourceMap: true,
+    productionSourceMap: false,
     productionGzip: false,
     productionGzipExtensions: [
       'js', 'css'
