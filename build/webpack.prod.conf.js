@@ -8,11 +8,21 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
+const extractStylus = new ExtractTextPlugin('[name].css');
+
 var webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js'
+  },
+  module: {
+    rules: [
+      {
+                test: /\.styl$/,
+                loader: extractStylus.extract(['css-loader', 'stylus-loader'])
+            }
+    ]
   },
   //插件项
     plugins: [
@@ -23,7 +33,8 @@ var webpackConfig = merge(baseWebpackConfig, {
         // 引入全局插入
         new webpack.ProvidePlugin({React: 'react'}),
         //允许错误不打断程序
-        new webpack.NoEmitOnErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin(),
+        extractStylus
     ]
 })
 

@@ -2,18 +2,19 @@
 var path = require('path')
 var http = require('http');
 var express = require('express');
-var config = require('./config')
 var app = express();
 var webpack = require('webpack');
+var config = require('./config')
 var webpackConfig = require('./webpack.dev.conf');
+
 var compiler = webpack(webpackConfig);
-app.use(require('morgan')('short'));
+
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
 
-debugger
+app.use(require('morgan')('short'));
 
 // Step 2: Attach the dev middleware to the compiler & the server
 app.use(require("webpack-dev-middleware")(compiler, {

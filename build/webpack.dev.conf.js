@@ -9,19 +9,26 @@ var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var config = require('./config')
 var baseWebpackConfig = require('./webpack.base.conf')
 
-
 var webpackConfig = merge(baseWebpackConfig, {
   entry: {
     '__webpack_hmr': 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'
   },
   devtool: '#source-map',
+  module: {
+    rules: [
+      {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!stylus-loader'
+      }
+    ]
+  },
   plugins: [
     new webpack
-            .optimize
-            .CommonsChunkPlugin('common'),
+      .optimize
+      .CommonsChunkPlugin('common'),
     new webpack.ProvidePlugin({React: 'react'}),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 })
 
