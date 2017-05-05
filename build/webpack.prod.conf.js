@@ -7,8 +7,6 @@ var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-const extractStylus = new ExtractTextPlugin('[name].css');
-
 var webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap
     ? '#source-map'
@@ -21,7 +19,12 @@ var webpackConfig = merge(baseWebpackConfig, {
     rules: [
       {
         test: /\.styl$/,
-        loader: extractStylus.extract(['css-loader', 'stylus-loader'])
+        //use: ExtractTextPlugin.extract(['css-loader', 'stylus-loader']),
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'stylus-loader']
+        })
+        //
       }
     ]
   },
@@ -35,12 +38,19 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.ProvidePlugin({React: 'react'}),
     //允许错误不打断程序
     new webpack.NoEmitOnErrorsPlugin(),
-    extractStylus,
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
+    new ExtractTextPlugin('[name].css'),
+    new OptimizeCSSPlugin({
+      cssProcessorOptions: {
+        safe: true
       }
-    })
+    }),
+    new webpack
+      .optimize
+      .UglifyJsPlugin({
+        compress: {
+          warnings: false
+        }
+      })
   ]
 })
 
