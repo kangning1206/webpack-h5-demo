@@ -1,3 +1,14 @@
+# 本地静态服务器启动
+
+$npm run server
+
+# build
+
+$npm run build
+
+
+
+
 $ webpack --display-error-details
 
 $ webpack --config XXX.js   //使用另一份配置文件（比如webpack.config2.js）来打包

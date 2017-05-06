@@ -17,15 +17,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   module: {
     rules: [
-      {
-        test: /\.styl$/,
-        //use: ExtractTextPlugin.extract(['css-loader', 'stylus-loader']),
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'stylus-loader']
-        })
-        //
-      }
+     
     ]
   },
   //插件项
@@ -38,7 +30,6 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.ProvidePlugin({React: 'react'}),
     //允许错误不打断程序
     new webpack.NoEmitOnErrorsPlugin(),
-    new ExtractTextPlugin('[name].css'),
     new OptimizeCSSPlugin({
       cssProcessorOptions: {
         safe: true

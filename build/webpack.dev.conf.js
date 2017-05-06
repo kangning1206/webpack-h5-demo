@@ -5,6 +5,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 var config = require('./config')
 var baseWebpackConfig = require('./webpack.base.conf')
@@ -15,12 +16,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   devtool: '#source-map',
   module: {
-    rules: [
-      {
-        test: /\.styl$/,
-        loader: 'style-loader!css-loader!stylus-loader'
-      }
-    ]
+    rules: []
   },
   plugins: [
     new webpack
@@ -28,7 +24,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       .CommonsChunkPlugin('common'),
     new webpack.ProvidePlugin({React: 'react'}),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new FriendlyErrorsPlugin()
   ]
 })
 
